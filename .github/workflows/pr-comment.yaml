@@ -36,7 +36,6 @@ jobs:
         run: |
           unzip pr.zip
           echo "::set-output name=NUM::$(<./NR)"
-          echo ${{ toJSON(github.event.workflow_run.pull_requests) }}
 
       - name: "Fail if PR number was not present"
         id: bad-pr
@@ -146,6 +145,6 @@ jobs:
         id: comment-diff
         uses: carpentries/actions/comment-diff@main
         with:
-          pr: ${{ env.NR }}
+          pr: ${{ github.event.workflow_run.pull_requests.[1].number }}
           body: ${{ needs.test-pr.outputs.msg }}
 
