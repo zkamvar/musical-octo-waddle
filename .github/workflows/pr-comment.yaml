@@ -153,10 +153,10 @@ jobs:
         id: spoof
         if: ${{ steps.dl.outputs.success == 'true' }}
         run: |
-          echo "" >> $body
-          echo "## :x: DANGER :x:" >> $body
-          echo "" >> $body
-          echo "This pull request may be compromised. Close this now." >> $body
+          echo "" >> ${{ env.body }}
+          echo "## :x: DANGER :x:" >> ${{ env.body }}
+          echo "" >> ${{ env.body }}
+          echo "This pull request may be compromised. Close this now." >> ${{ env.body }}
 
       - name: "Comment on PR"
         id: comment-diff
