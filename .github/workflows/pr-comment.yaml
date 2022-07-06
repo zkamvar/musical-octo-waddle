@@ -145,6 +145,6 @@ jobs:
         id: comment-diff
         uses: carpentries/actions/comment-diff@main
         with:
-          pr: ${{ github.event.workflow_run.pull_requests[1].number }}
+          pr: ${{ github.event.workflow_run.pull_requests[0].number }}
           body: ${{ needs.test-pr.outputs.msg }}
 
