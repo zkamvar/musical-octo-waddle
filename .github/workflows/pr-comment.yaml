@@ -36,7 +36,7 @@ jobs:
         run: |
           unzip pr.zip
           echo "::set-output name=NUM::$(<./NR)"
-          echo ${{ github.event.workflow_run.pull_requests }}
+          echo ${{ toJSON(github.event.workflow_run.pull_requests) }}
 
       - name: "Fail if PR number was not present"
         id: bad-pr
