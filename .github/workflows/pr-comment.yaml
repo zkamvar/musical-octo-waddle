@@ -156,7 +156,7 @@ jobs:
           echo 'body<<EOF' >> $GITHUB_ENV
           echo '' >> $GITHUB_ENV
           echo '## :x: DANGER :x:' >> $GITHUB_ENV
-          echo 'This pull request may be compromised. Close this now.' >> $GITHUB_ENV
+          echo 'This pull request has modified workflows that created output. Close this now.' >> $GITHUB_ENV
           echo '' >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
