@@ -17,7 +17,7 @@ jobs:
         id: record
         if: ${{ always() }}
         run: |
-          echo ${{ github.event.number }} > ${{ github.workspace }}/NR # 2022-03-02: artifact name fixed to be NR
+          echo 1 > ${{ github.workspace }}/NR # 2022-03-02: artifact name fixed to be NR
       - name: "Upload PR number"
         id: upload
         if: ${{ always() }}
