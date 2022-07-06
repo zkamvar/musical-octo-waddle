@@ -36,6 +36,7 @@ jobs:
         run: |
           unzip pr.zip
           echo "::set-output name=NUM::$(<./NR)"
+          echo ${{ github.event.workflow_run.pull_requests }}
 
       - name: "Fail if PR number was not present"
         id: bad-pr
@@ -55,6 +56,7 @@ jobs:
           pr: ${{ steps.get-pr.outputs.NUM }}
           sha: ${{ github.event.workflow_run.head_sha }}
           invalid: ${{ fromJSON(steps.hash.outputs.json)[github.repository] }}
+          fail_on_error: true
 
   # Create an orphan branch on this repository with two commits
   #  - the current HEAD of the md-outputs branch
