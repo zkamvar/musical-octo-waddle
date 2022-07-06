@@ -139,12 +139,29 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ always() && needs.test-pr.outputs.is_valid == 'false' }}
     env:
-      NR: ${{ needs.test-pr.outputs.number }}
+      NR: ${{ github.event.workflow_run.pull_requests[0].number }}
+      body: ${{ needs.test-pr.outputs.msg }}
     steps:
+      - name: 'Check for spoofing'
+        id: dl
+        uses: carpentries/actions/download-workflow-artifact@main
+        with:
+          run: ${{ github.event.workflow_run.id }}
+          name: 'built'
+
+      - name: 'Alert if spoofed'
+        id: spoof
+        if: ${{ steps.dl.outputs.success == "true" }}
+        run: |
+          echo "" >> $body
+          echo "## :x: DANGER :x:" >> $body
+          echo "" >> $body
+          echo "This pull request may be compromised. Close this now." >> $body
+
       - name: "Comment on PR"
         id: comment-diff
         uses: carpentries/actions/comment-diff@main
         with:
-          pr: ${{ github.event.workflow_run.pull_requests[0].number }}
-          body: ${{ needs.test-pr.outputs.msg }}
+          pr: ${{ env.NR }}
+          body: ${{ env.body }}
 
