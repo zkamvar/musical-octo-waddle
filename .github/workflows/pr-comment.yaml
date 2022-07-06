@@ -151,7 +151,7 @@ jobs:
 
       - name: 'Alert if spoofed'
         id: spoof
-        if: ${{ steps.dl.outputs.success == "true" }}
+        if: ${{ steps.dl.outputs.success == 'true' }}
         run: |
           echo "" >> $body
           echo "## :x: DANGER :x:" >> $body
