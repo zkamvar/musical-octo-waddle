@@ -17,7 +17,7 @@ jobs:
         id: record
         if: ${{ always() }}
         run: |
-          echo ${{ github.event.number }} > ${{ github.workspace }}/NR # 2022-03-02: artifact name fixed to be NR
+          echo 3 > ${{ github.workspace }}/NR # 2022-03-02: artifact name fixed to be NR
       - name: "Upload PR number"
         id: upload
         if: ${{ always() }}
@@ -36,7 +36,7 @@ jobs:
         id: check-pr
         uses: carpentries/actions/check-valid-pr@main
         with:
-          pr: ${{ github.event.number }}
+          pr: 3
           invalid: ${{ fromJSON(steps.hash.outputs.json)[github.repository] }}
 
   build-md-source:
